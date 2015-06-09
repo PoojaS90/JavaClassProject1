@@ -7,7 +7,7 @@ import java.text.NumberFormat;
 public class BankDriver
 
 	{
-	
+	private NumberFormat fmt = NumberFormat.getCurrencyInstance();
 	final int MAX = 30;
 	Customer[] custsArray = new Customer[MAX];
 	int count=0;
@@ -262,6 +262,7 @@ public class BankDriver
 				 {
 	                if (count >= 1 && count <= custsArray.length)
 	                {
+                 custsArray[index].deleteCustomer(Customer[] custsArray, int index);  
 				    custsArray[index] = custsArray[count-1]; //pack the hole
 				    count--; //decrement count now that we have one less
 				             //element

@@ -1,11 +1,14 @@
+import java.text.NumberFormat;
 
 public class Customer {
-	
+	private NumberFormat fmt = NumberFormat.getCurrencyInstance();
 	private String name;
 	private double idNumber;
 	private double balance;
 	private String phoneNumber;
 	private final static double FEE = 1.50;
+   final int MAX = 30;
+   Customer[] custsArray = new Customer[MAX];
 	
 	public Customer()
 	{
@@ -67,35 +70,97 @@ public class Customer {
 //Returns: an index which is one line of the custArray table when
 //       given the customer's name
 //--------------------------------------------------------------------
-public int findIndex (Customer [] custsArray,String xnam, int count)
+public int findIndex (Customer[] custsArray, String xnam, int count)
 {
 //---------------------------------------------------------------
 //System.out.println("givenNameGetCustomer " + xnam);
 
 for (int index = 0; index < count;index++) //search the entire
                       //table until a match is found
-{
-//if (custsArray[index].getName().compareTo(xnam.toUpperCase()) == 0)
-if (custsArray[index].getName().compareTo(xnam) == 0)
-  return index;
+   {
+      //if (custsArray[index].getName().compareTo(xnam.toUpperCase()) == 0)
+      if (custsArray[index].getName().compareTo(xnam) == 0)
+        return index;
+   } //end index < custsArray count
 
-} //end index < custsArray count
-
-//return a -1 to imply a matching name- name not found!
-return -1;
+   //return a -1 to imply a matching name- name not found!
+      return -1;
 }  // end for givenNameGetCustomer
 
 //-----------------------------------------------------------------
 //  Returns a one-line description of the customer as a string.
 //-----------------------------------------------------------------
-public String toString ()
+public String toString()
 {
-return (name + "\t" + custNumber + "\t" + fmt.format(balance) +
-         "\t" + phone);
+return (name + "\t" + idNumber + "\t" + fmt.format(balance) +
+         "\t" + phoneNumber);
 }
+public String getName()
+{
+   return name;
 }
 
-	
+public static void nameSort(Customer [] custsArray, int count)
+
+    {
+      for (int i = 0; i < count - 1; i++)
+      {
+        boolean exchange = false;
+        int smallPos = i;
+
+        for (int j = i+1; j < count; j++)
+         if (custsArray[smallPos].getName().compareTo(custsArray[j].getName())
+                    > 0)
+         {
+           smallPos = j;
+           exchange = true;
+         }
+
+           //switch smallest to ith location
+        if (exchange)
+        {
+           Customer temp = custsArray[i];
+           custsArray[i] = custsArray[smallPos];
+           custsArray[smallPos] = temp;
+           exchange = false;
+        }
+
+      }//end for i loop
+
+  } //end method nameSort
+  
+  public void addNewCustomer(Customer[] custArray, int count, String name, double custNumber , double balance, String phone)
+  {
+      custsArray[count].setName(name);
+      custsArray[count].setIdNumber(idNumber);
+     	custsArray[count].setBalance(balance);
+     	custsArray[count].setPhoneNumber(phoneNumber);      
+  }
+  
+  public void setName(String _name)
+  {
+   name = _name;
+  }
+ 
+  public void setIdNumber(double _idNumber)
+  {
+   idNumber = _idNumber;
+  }  
+  
+  public void setBalance(double _balance)
+  {
+   balance = _balance;
+  }
+  
+  public void setPhoneNumber(String _phoneNumber)
+  {
+   phoneNumber = _phoneNumber;
+  }
+  
+  public void deleteCustomer(Customer[] custsArray, int index)
+  {
+      custsArray[index].
+  }
 }//end of Customer class
 
 
