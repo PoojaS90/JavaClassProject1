@@ -29,24 +29,25 @@ public class Customer {
 
 	public double withdraw(double amount)
 	{
+      amount = amount + FEE;
 		if ((amount > 0) && (amount <= balance))
 		{
 			balance = balance - amount;
-			balance = balance - FEE;
+			//balance = balance - FEE;
          
 		}
 		else if (amount < 0)
 		{
         
-			         //System.out.printf("Error: Withdraw amount is invalid/n Customer: %s/nRequested:%f", name, _amount);
+			JOptionPane.showMessageDialog(null, "Error: Amount cannot be less than 0" +
+                                       JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (amount > balance)
 		{
-      //String str = _amount+FEE;
-			//System.out.printf("Error: Insufficient funds/nCustomer:%s/nRequested:%f/nAvailable:%f", name, _amount, balance);
-		   JOptionPane.showMessageDialog(null, "Error: Insufficient Funds" +
-                                       "Customer: " + getName() + 
-                                       "Requested: " + amount +
+   
+		   JOptionPane.showMessageDialog(null, "Error: Insufficient Funds" + "\n" +
+                                       "Customer: " + getName() + "\n" +
+                                       "Requested: " + amount + "\n" +
                                        "Available: " + getBalance() +
                                        JOptionPane.INFORMATION_MESSAGE);
 
@@ -59,6 +60,8 @@ public class Customer {
 		if (_amount > 0)
 		{
 			balance += _amount;
+         
+         
 		}
 		else
 		{
@@ -143,10 +146,10 @@ public static void nameSort(Customer [] custsArray, int count)
   
   public void addNewCustomer(Customer[] custArray, int count, String name, double custNumber , double balance, String phone)
   {
-      custsArray[count].setName(name);
-      custsArray[count].setIdNumber(idNumber);
-     	custsArray[count].setBalance(balance);
-     	custsArray[count].setPhoneNumber(phoneNumber);      
+      custArray[count].setName(name);
+      custArray[count].setIdNumber(idNumber);
+     	custArray[count].setBalance(balance);
+     	custArray[count].setPhoneNumber(phoneNumber);      
   }
   
   public void setName(String _name)
