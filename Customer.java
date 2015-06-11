@@ -1,4 +1,5 @@
 import java.text.NumberFormat;
+import javax.swing.JOptionPane;
 
 public class Customer {
 	private NumberFormat fmt = NumberFormat.getCurrencyInstance();
@@ -26,21 +27,31 @@ public class Customer {
 		phoneNumber = _phoneNumber;
 	}
 
-	public void withdraw(double _amount)
+	public double withdraw(double amount)
 	{
-		if ((_amount > 0) && (_amount <= balance))
+		if ((amount > 0) && (amount <= balance))
 		{
-			balance = balance - _amount;
+			balance = balance - amount;
 			balance = balance - FEE;
+         
 		}
-		else if (_amount < 0)
+		else if (amount < 0)
 		{
-			System.out.printf("Error: Withdraw amount is invalid/n Customer: %s/nRequested:%f", name, _amount);
+        
+			         //System.out.printf("Error: Withdraw amount is invalid/n Customer: %s/nRequested:%f", name, _amount);
 		}
-		else if (_amount > balance)
+		else if (amount > balance)
 		{
-			System.out.printf("Error: Insufficient funds/nCustomer:%s/nRequested:%f/nAvailable:%f", name, _amount, balance);
-		}
+      //String str = _amount+FEE;
+			//System.out.printf("Error: Insufficient funds/nCustomer:%s/nRequested:%f/nAvailable:%f", name, _amount, balance);
+		   JOptionPane.showMessageDialog(null, "Error: Insufficient Funds" +
+                                       "Customer: " + getName() + 
+                                       "Requested: " + amount +
+                                       "Available: " + getBalance() +
+                                       JOptionPane.INFORMATION_MESSAGE);
+
+      }
+      return balance;
 	}
 	
 	public void deposit(double _amount)
@@ -55,9 +66,10 @@ public class Customer {
 		}
 	}
 	
-	public void addInterest()
+	public double addInterest()
 	{
 		balance = balance + (balance*0.045);
+      return balance;
 	}
 	
 	//-----------------------------------------------------------------
@@ -159,8 +171,24 @@ public static void nameSort(Customer [] custsArray, int count)
   
   public void deleteCustomer(Customer[] custsArray, int index)
   {
-      custsArray[index].
+      //custsArray[index].
   }
+  
+  public double getBalance()
+  {
+      return balance;
+  }
+  
+  public double getCustomerNumber()
+  {
+      return idNumber;
+  }
+  
+  public String getPhone()
+  {
+      return phoneNumber;
+  }
+  
 }//end of Customer class
 
 
