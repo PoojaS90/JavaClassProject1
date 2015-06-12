@@ -235,13 +235,17 @@ public class BankTestDriver
 				 OutPutText = "";
 
 				 for (int scan = 0; scan < count; scan++)
-				 {
-			       OutPutText =
-			          (OutPutText + custsArray[scan].getName() + " " +
+				 {/*
+             			       OutPutText =
+			          (OutPutText + String.format("%s %d %.2f %s",custsArray[scan].getName() + " " +
 				       custsArray[scan].getCustomerNumber() + " "   +
 					   fmt.format(custsArray[scan].getBalance()) + " "  +
+					   custsArray[scan].getPhone()+ "\n");*/
+			       OutPutText =
+			          (OutPutText + String.format("%s %6.0f",custsArray[scan].getName(),
+				      custsArray[scan].getCustomerNumber()) + " " + fmt.format(custsArray[scan].getBalance())+ " " +
 					   custsArray[scan].getPhone()+ "\n");
-
+//
 			     }
 
 	              JOptionPane.showMessageDialog(null,OutPutText,

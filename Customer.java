@@ -1,16 +1,40 @@
+/**Program CSC 225 Prog I
+ * Course Title: Introduction to Computer Science
+ * Course Number: CSC 225-800,805
+ * Professor: Christine Forde
+ * @author Pooja Sharma, Sushma, Amit Pandey
+ * @version 1.0, 06/11/2015
+ *
+ * Description: Program CRC 225 Prog I
+ * This program is designed to process binary string (a string containing ones and zeroes). The string is input to
+ * the program via the command line. Only valid binary symbols will be processed: all others will cause an error 
+ * message to display. In addition to a message, the invalid symbol will also be displayed to the user. Invalid 
+ * data will not cause the program to ABEND. When the entire string has been processed, summary information is 
+ * displayed to the user. (Christine Forde)
+ 
+ * ***********************************INCLUDE FORMULAS **********************************************************
+ 
+ */
+   
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
+import java.io.*;
 
+/*
+* A class to manage customer account data
+*/
 public class Customer {
-	private NumberFormat fmt = NumberFormat.getCurrencyInstance();
-	private String name;
-	private double idNumber;
-	private double balance;
-	private String phoneNumber;
-	private final static double FEE = 1.50;
-   final int MAX = 30;
-   Customer[] custsArray = new Customer[MAX];
 	
+   private NumberFormat fmt = NumberFormat.getCurrencyInstance();
+	private String name;                               //name of the customer
+	private double idNumber;                           //Customer ID 
+	private double balance;                            //Customer account balance 
+	private String phoneNumber;                        //Customer phone number
+	private final static double FEE = 1.50;            //Fee charged for successful withdrawl
+   final int MAX = 30;                                //Number of customer in ES&L bank
+   Customer[] custsArray = new Customer[MAX];         //Array to store customer objects
+	
+   //default constructors
 	public Customer()
 	{
 		name = "";
@@ -19,6 +43,7 @@ public class Customer {
 		phoneNumber = "";
 	}//end of default constructor
 	
+   //non-default constructor
 	public Customer(String _name, double _idNumber, double _balance, String _phoneNumber)
 	{
 		name = _name;
@@ -26,15 +51,17 @@ public class Customer {
 		balance = _balance;
 		phoneNumber = _phoneNumber;
 	}
-
+   /*
+    *A method to validate and deducts the withdrawl amount and fee from the balance
+    * @param amount withdrawl amount
+    * @return balance remaining balance after withdrawl
+    */
 	public double withdraw(double amount)
 	{
       amount = amount + FEE;
 		if ((amount > 0) && (amount <= balance))
 		{
 			balance = balance - amount;
-			//balance = balance - FEE;
-         
 		}
 		else if (amount < 0)
 		{
@@ -44,28 +71,25 @@ public class Customer {
 		}
 		else if (amount > balance)
 		{
-   
-		   JOptionPane.showMessageDialog(null, "Error: Insufficient Funds" + "\n" +
-                                       "Customer: " + getName() + "\n" +
-                                       "Requested: " + amount + "\n" +
-                                       "Available: " + getBalance() +
-                                       JOptionPane.INFORMATION_MESSAGE);
-
+         //FIX LINE                                   
+         JOptionPane.showMessageDialog(null,String.format("Error: Insufficient Funds\nCustomer: %s\nRequested: %.2f \nAvailable: %.2f\n", getName(), amount, getBalance(), JOptionPane.INFORMATION_MESSAGE));
       }
       return balance;
 	}
 	
-	public void deposit(double _amount)
+   /*
+    * A method to deposit funds into individual customer accounts
+    * @param amount 
+   */
+	public void deposit(double amount)
 	{
-		if (_amount > 0)
+		if (amount > 0)
 		{
-			balance += _amount;
-         
-         
-		}
+			balance += amount;
+      }
 		else
 		{
-			System.out.printf("Error: Deposit amount is invalid/nCustomer:%s/nRequested:%f", name, _amount);
+			System.out.printf("Error: Deposit amount is invalid/nCustomer:%s/nRequested:%f", name, amount);
 		}
 	}
 	
@@ -147,9 +171,9 @@ public static void nameSort(Customer [] custsArray, int count)
   public void addNewCustomer(Customer[] custArray, int count, String name, double custNumber , double balance, String phone)
   {
       custArray[count].setName(name);
-      custArray[count].setIdNumber(idNumber);
+      custArray[count].setIdNumber(custNumber);
      	custArray[count].setBalance(balance);
-     	custArray[count].setPhoneNumber(phoneNumber);      
+     	custArray[count].setPhoneNumber(phone);      
   }
   
   public void setName(String _name)
