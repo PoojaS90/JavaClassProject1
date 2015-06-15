@@ -80,7 +80,7 @@ public class Customer {
    /*
     * A method to deposit funds into individual customer accounts
     * @param amount 
-   */
+    */
 	public void deposit(double amount)
 	{
 		if (amount > 0)
@@ -176,36 +176,65 @@ public static void nameSort(Customer [] custsArray, int count)
      	custArray[count].setPhoneNumber(phone);      
   }
   
-  public void setName(String _name)
+  /*
+   * A method to set the name of a customer
+   * @param name 
+   */
+  public void setName(String name)
   {
-   name = _name;
+   name = name;
   }
- 
-  public void setIdNumber(double _idNumber)
+  
+  /*
+   * A method to set the id number of a customer
+   * @param idNumber 
+   */
+  public void setIdNumber(double idNumber)
   {
-   idNumber = _idNumber;
+   idNumber = idNumber;
   }  
   
-  public void setBalance(double _balance)
+  /*
+   * A method to set the balance for a customer's account
+   * @param balance 
+   */
+  public void setBalance(double balance)
   {
-   balance = _balance;
+   balance = balance;
   }
   
-  public void setPhoneNumber(String _phoneNumber)
+  /*
+   * A method to set the phone number of a customer
+   * @param phoneNumber 
+   */  
+  public void setPhoneNumber(String phoneNumber)
   {
-   phoneNumber = _phoneNumber;
+   phoneNumber = phoneNumber;
   }
   
+  /* ASK PROFESSOR
+   * A method to set the name of a customer
+   * @param Customer[] custsArray 
+   * @param index
+   */  
   public void deleteCustomer(Customer[] custsArray, int index)
   {
       //custsArray[index].
   }
   
+  /*
+   * A method to get the balance amount
+   * @return balance 
+   */  
   public double getBalance()
   {
       return balance;
   }
   
+  /*
+   * A method to get the is number of a customer
+   * @return idNumber 
+   */  
   public double getCustomerNumber()
   {
       return idNumber;
