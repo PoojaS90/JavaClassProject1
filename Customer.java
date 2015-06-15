@@ -15,17 +15,17 @@
  * ***********************************INCLUDE FORMULAS **********************************************************
  
  */
-   
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 import java.io.*;
-
+import java.text.DecimalFormat;
 /*
 * A class to manage customer account data
 */
 public class Customer {
 	
-   private NumberFormat fmt = NumberFormat.getCurrencyInstance();
+   private NumberFormat fmt = NumberFormat.getCurrencyInstance();   
+   DecimalFormat df = new DecimalFormat("$0.00");
 	private String name;                               //name of the customer
 	private double idNumber;                           //Customer ID 
 	private double balance;                            //Customer account balance 
@@ -59,7 +59,8 @@ public class Customer {
 	public double withdraw(double amount)
 	{
       amount = amount + FEE;
-		if ((amount > 0) && (amount <= balance))
+		
+      if ((amount > 0) && (amount <= balance))
 		{
 			balance = balance - amount;
 		}
@@ -72,7 +73,10 @@ public class Customer {
 		else if (amount > balance)
 		{
          //FIX LINE                                   
-         JOptionPane.showMessageDialog(null,String.format("Error: Insufficient Funds\nCustomer: %s\nRequested: %.2f \nAvailable: %.2f\n", getName(), amount, getBalance(), JOptionPane.INFORMATION_MESSAGE));
+         JOptionPane.showMessageDialog(null,"Error: Insufficient Funds" + "\nName:  " +
+          name + "\nRequested: " + df.format(amount) + "\nAvailable: " + df.format(balance));
+                   
+            
       }
       return balance;
 	}
@@ -89,7 +93,8 @@ public class Customer {
       }
 		else
 		{
-			System.out.printf("Error: Deposit amount is invalid/nCustomer:%s/nRequested:%f", name, amount);
+			JOptionPane.showMessageDialog(null, "Error: Deposit amount is invalid" + "\nCustomer: " +
+         name + "\nRequested: " + df.format(amount));
 		}
 	}
 	
@@ -219,7 +224,7 @@ public static void nameSort(Customer [] custsArray, int count)
    */  
   public void deleteCustomer(Customer[] custsArray, int index)
   {
-      //custsArray[index].
+      
   }
   
   /*
