@@ -1,4 +1,5 @@
-/**Program CSC 225 Prog I
+/***************************************************************************************************************
+ *Program CSC 225 Prog I
  * Course Title: Introduction to Computer Science
  * Course Number: CSC 225-800,805
  * Professor: Christine Forde
@@ -11,14 +12,25 @@
  * message to display. In addition to a message, the invalid symbol will also be displayed to the user. Invalid 
  * data will not cause the program to ABEND. When the entire string has been processed, summary information is 
  * displayed to the user. (Christine Forde)
+ *
+ * Formula-
+ * Adds the fee to the withdrawl amount
+ * amount = amount + FEE; 
+ *
+ * Reduces the balance with withdrawl amount        
+ * balance = balance - amount;
+ *
+ * Adds 4.5% interest to the balance
+ * balance = balance + (balance*0.045);
+ *************************************************************************************************************/
  
- * ***********************************INCLUDE FORMULAS **********************************************************
  
- */
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 import java.io.*;
 import java.text.DecimalFormat;
+
+
 /*
 * A class to manage customer account data
 */
@@ -51,6 +63,7 @@ public class Customer {
 		balance = _balance;
 		phoneNumber = _phoneNumber;
 	}
+   
    /*
     *A method to validate and deducts the withdrawl amount and fee from the balance
     * @param amount withdrawl amount
@@ -71,20 +84,18 @@ public class Customer {
                                        JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (amount > balance)
-		{
-         //FIX LINE                                   
+		{                                 
          JOptionPane.showMessageDialog(null,"Error: Insufficient Funds" + "\nName:  " +
-          name + "\nRequested: " + df.format(amount) + "\nAvailable: " + df.format(balance));
-                   
-            
+          name + "\nRequested: " + df.format(amount) + "\nAvailable: " + df.format(balance));     
       }
+      
       return balance;
 	}
 	
    /*
     * A method to deposit funds into individual customer accounts
     * @param amount 
-    */
+   */
 	public void deposit(double amount)
 	{
 		if (amount > 0)
@@ -104,47 +115,59 @@ public class Customer {
       return balance;
 	}
 	
-	//-----------------------------------------------------------------
-//  Method: findIndex
-//Purpose: searches the custsArray by name for a given matching
-//name. Uses the toUpperCase to convert the given name to
-//upper case before during the search. This protects against
-//the given name having lower and upper strings.
-//Parameters: none
-//Returns: an index which is one line of the custArray table when
-//       given the customer's name
-//--------------------------------------------------------------------
-public int findIndex (Customer[] custsArray, String xnam, int count)
-{
-//---------------------------------------------------------------
-//System.out.println("givenNameGetCustomer " + xnam);
-
-for (int index = 0; index < count;index++) //search the entire
-                      //table until a match is found
+   //-----------------------------------------------------------------
+   //Method: findIndex
+   //Purpose: searches the custsArray by name for a given matching
+   //name. Uses the toUpperCase to convert the given name to
+   //upper case before during the search. This protects against
+   //the given name having lower and upper strings.
+   //Parameters: none
+   //Returns: an index which is one line of the custArray table when
+   //       given the customer's name
+   //--------------------------------------------------------------------
+   public int findIndex (Customer[] custsArray, String xnam, int count)
    {
-      //if (custsArray[index].getName().compareTo(xnam.toUpperCase()) == 0)
-      if (custsArray[index].getName().compareTo(xnam) == 0)
-        return index;
-   } //end index < custsArray count
+   //---------------------------------------------------------------
+   //System.out.println("givenNameGetCustomer " + xnam);
+   
+   for (int index = 0; index < count;index++) //search the entire
+                         //table until a match is found
+      {
+         //if (custsArray[index].getName().compareTo(xnam.toUpperCase()) == 0)
+         if (custsArray[index].getName().compareTo(xnam) == 0)
+           return index;
+      } //end index < custsArray count
+   
+      //return a -1 to imply a matching name- name not found!
+         return -1;
+   }  // end for givenNameGetCustomer
+   
+   /*
+   * Method that returns a one-line description of the customer as a string.
+   * @return a string of name, idnumber and phonenumber  
+   */
+   public String toString()
+   {
+      return (name + "\t" + idNumber + "\t" + fmt.format(balance) +
+            "\t" + phoneNumber);
+   }
+   
+   /*
+   * An accessor to get name
+   * @return name name of the customer
+   */
+   public String getName()
+   {
+      return name;
+   }
+   
 
-   //return a -1 to imply a matching name- name not found!
-      return -1;
-}  // end for givenNameGetCustomer
-
-//-----------------------------------------------------------------
-//  Returns a one-line description of the customer as a string.
-//-----------------------------------------------------------------
-public String toString()
-{
-return (name + "\t" + idNumber + "\t" + fmt.format(balance) +
-         "\t" + phoneNumber);
-}
-public String getName()
-{
-   return name;
-}
-
-public static void nameSort(Customer [] custsArray, int count)
+   /*
+   * method to sort the names in the array
+   * @param custsArray Array of objects
+   * @param count size of array
+   */   
+   public static void nameSort(Customer [] custsArray, int count)
 
     {
       for (int i = 0; i < count - 1; i++)
@@ -173,8 +196,18 @@ public static void nameSort(Customer [] custsArray, int count)
 
   } //end method nameSort
   
+  /*
+  * A method to add new customer to the bank 
+  * @param CustArray Array of objects
+  * @param count size of the array
+  * @param name name of the new customer
+  * @param custNumber customer number
+  * @param balance new balance amount
+  * @param phone phone number of the new customer 
+  */
   public void addNewCustomer(Customer[] custArray, int count, String name, double custNumber , double balance, String phone)
   {
+      //access methods called from ojects stored in the array
       custArray[count].setName(name);
       custArray[count].setIdNumber(custNumber);
      	custArray[count].setBalance(balance);
@@ -184,7 +217,7 @@ public static void nameSort(Customer [] custsArray, int count)
   /*
    * A method to set the name of a customer
    * @param name 
-   */
+  */
   public void setName(String name)
   {
    name = name;
@@ -193,7 +226,7 @@ public static void nameSort(Customer [] custsArray, int count)
   /*
    * A method to set the id number of a customer
    * @param idNumber 
-   */
+  */
   public void setIdNumber(double idNumber)
   {
    idNumber = idNumber;
@@ -202,49 +235,45 @@ public static void nameSort(Customer [] custsArray, int count)
   /*
    * A method to set the balance for a customer's account
    * @param balance 
-   */
+  */
   public void setBalance(double balance)
   {
    balance = balance;
   }
   
   /*
-   * A method to set the phone number of a customer
-   * @param phoneNumber 
-   */  
+  * A method to set the phone number of a customer
+  * @param phoneNumber 
+  */  
   public void setPhoneNumber(String phoneNumber)
   {
    phoneNumber = phoneNumber;
   }
   
-  /* ASK PROFESSOR
-   * A method to set the name of a customer
-   * @param Customer[] custsArray 
-   * @param index
-   */  
-  public void deleteCustomer(Customer[] custsArray, int index)
-  {
-      
-  }
   
   /*
-   * A method to get the balance amount
-   * @return balance 
-   */  
+  * A method to get the balance amount
+  * @return balance 
+  */  
   public double getBalance()
   {
       return balance;
   }
   
   /*
-   * A method to get the is number of a customer
-   * @return idNumber 
-   */  
+  * A method to get the is number of a customer
+  * @return idNumber 
+  */  
   public double getCustomerNumber()
   {
       return idNumber;
   }
   
+  
+  /*
+  * A method to get the phone number of a customer
+  * @return phoneNumber phone of the new customer
+  */
   public String getPhone()
   {
       return phoneNumber;
