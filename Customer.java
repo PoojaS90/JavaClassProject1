@@ -7,11 +7,16 @@
  * @version 1.0, 06/11/2015
  *
  * Description: Program CRC 225 Prog I
- * This program is designed to process binary string (a string containing ones and zeroes). The string is input to
- * the program via the command line. Only valid binary symbols will be processed: all others will cause an error 
- * message to display. In addition to a message, the invalid symbol will also be displayed to the user. Invalid 
- * data will not cause the program to ABEND. When the entire string has been processed, summary information is 
- * displayed to the user. (Christine Forde)
+ * Abstract:
+ * This program is designed to read data from a Customer input file(customer.txt). The read data 
+ * is then stored in  an array of type object. The program then displays the unsorted data to the  
+ * user. User is then displayed a menu of choices to the user. The menu choices are - 1. Deposit sum 
+ * 2. Withdraw amount 3. Create a new customer 4. view all customers 5. Delete a customer 9. Quit.  
+ * The program manages each of these choices accordingly. At the end, array is sorted in alphabetical 
+ * order by name and all customer account is displayed. (Christine Forde)
+ *
+ * Class - one (customer)
+ * Method - Several that process customer requests
  *
  * Formula-
  * Adds the fee to the withdrawl amount
